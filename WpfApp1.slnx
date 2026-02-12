@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../Setup1/Setup1.vdproj" Type="Installer" />
+  <Project Path="WpfApp1.csproj" />
+</Solution>
