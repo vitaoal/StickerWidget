@@ -1,38 +1,38 @@
 # Sticker Widget - Gerenciador de Stickers para Windows
 
-## ?? DescriÁ„o
+## Descri√ß√£o
 
-Widget para Windows desenvolvido em WPF que funciona como um gerenciador de stickers (imagens) para envio r·pido em aplicativos de chat. O projeto utiliza arquitetura MVVM e APIs nativas do Windows para m·xima performance.
+Widget para Windows desenvolvido em WPF que funciona como um gerenciador de stickers (imagens) para envio r√°pido em aplicativos de chat. O projeto utiliza arquitetura MVVM e APIs nativas do Windows para m√°xima performance.
 
-## ? Funcionalidades
+## Funcionalidades
 
-- **Atalho Global**: Pressione `Alt + Shift + S` para abrir/fechar o widget de qualquer lugar
-- **Envio R·pido**: Clique em um sticker e ele ser· automaticamente colado no aplicativo ativo
-- **Performance Otimizada**: Carregamento assÌncrono com thumbnails otimizados (DecodePixelWidth)
+- **Atalho Global**: Pressione `Alt + Ctrl + S` para abrir/fechar o widget de qualquer lugar
+- **Envio R√°pido**: Clique em um sticker e ele ser√° automaticamente colado no aplicativo ativo
+- **Performance Otimizada**: Carregamento ass√≠ncrono com thumbnails otimizados (DecodePixelWidth)
 - **Interface Moderna**: Window sem bordas, transparente e com design limpo
-- **Gest„o Inteligente de Foco**: Restaura automaticamente o foco para a janela anterior
+- **Gest√£o Inteligente de Foco**: Restaura automaticamente o foco para a janela anterior
 
-## ??? Arquitetura
+## Arquitetura
 
 ### Estrutura de Pastas
 
 ```
 WpfApp1/
-??? ViewModels/
-?   ??? MainViewModel.cs          # ViewModel principal (MVVM)
-??? Services/
-?   ??? HotKeyService.cs           # Gerenciamento de atalhos globais
-?   ??? WindowManagerService.cs    # Gest„o de foco e simulaÁ„o de paste
-?   ??? ImageService.cs            # Carregamento otimizado de imagens
-?   ??? NativeMethods.cs           # Interop com Win32 API
-??? Converters/
-?   ??? InverseBooleanToVisibilityConverter.cs
-??? MainWindow.xaml                # Interface principal
-??? MainWindow.xaml.cs             # Code-behind
-??? App.xaml                       # ConfiguraÁ„o da aplicaÁ„o
+ ViewModels/
+    MainViewModel.cs          # ViewModel principal (MVVM)
+ Services/
+    HotKeyService.cs           # Gerenciamento de atalhos globais
+    WindowManagerService.cs    # Gest√£o de foco e simula√ß√£o de paste
+    ImageService.cs            # Carregamento otimizado de imagens
+    NativeMethods.cs           # Interop com Win32 API
+ Converters/
+    InverseBooleanToVisibilityConverter.cs
+ MainWindow.xaml                # Interface principal
+ MainWindow.xaml.cs             # Code-behind
+ App.xaml                       # Configura√ß√£o da aplica√ß√£o
 ```
 
-## ?? Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **.NET 10**
 - **WPF (Windows Presentation Foundation)**
@@ -43,10 +43,10 @@ WpfApp1/
   - `SetForegroundWindow` - Restaura foco
   - `keybd_event` - Simula Ctrl+V
 
-## ?? Como Usar
+## Como Usar
 
-1. **ConfiguraÁ„o Inicial**:
-   - Por padr„o, o widget carrega imagens da pasta "Imagens" do Windows
+1. **Configura√ß√£o Inicial**:
+   - Por padr√£o, o widget carrega imagens da pasta "Imagens" do Windows
    - Adicione seus stickers (PNG, JPG, JPEG, GIF, WEBP) nesta pasta
 
 2. **Abrindo o Widget**:
@@ -55,81 +55,68 @@ WpfApp1/
 3. **Enviando um Sticker**:
    - Clique no sticker desejado
    - O widget automaticamente:
-     - Copia a imagem para a ·rea de transferÍncia
+     - Copia a imagem para a √°rea de transfer√™ncia
      - Se oculta
      - Restaura o foco para o aplicativo anterior
      - Simula Ctrl+V para colar a imagem
 
-## ?? Fluxo de ExecuÁ„o
+## Fluxo de Execu√ß√£o
 
 ```
-1. Usu·rio pressiona Alt+Shift+S
-   ?
+1. Usu√°rio pressiona Alt+Shift+S
+   
 2. HotKeyService detecta e chama ToggleWidget()
-   ?
+   
 3. MainViewModel.PrepareForShow() salva janela ativa atual
-   ?
-4. Widget È exibido
-   ?
-5. Usu·rio clica em um sticker
-   ?
+   
+4. Widget √© exibido
+   
+5. Usu√°rio clica em um sticker
+   
 6. ImageService copia imagem para clipboard
-   ?
+   
 7. Widget se oculta
-   ?
+   
 8. WindowManagerService restaura foco da janela salva
-   ?
+   
 9. WindowManagerService simula Ctrl+V
-   ?
-10. Imagem È colada no aplicativo de destino
+   
+10. Imagem √© colada no aplicativo de destino
 ```
 
-## ?? CaracterÌsticas TÈcnicas
+## Caracter√≠sticas T√©cnicas
 
 ### Performance
-- **Carregamento AssÌncrono**: N„o bloqueia a UI
-- **DecodePixelWidth**: Reduz uso de memÛria RAM em atÈ 80%
+- **Carregamento Ass√≠ncrono**: N√£o bloqueia a UI
+- **DecodePixelWidth**: Reduz uso de mem√≥ria RAM em at√© 80%
 - **Bitmap.Freeze()**: Permite acesso cross-thread seguro
 - **CacheOption.OnLoad**: Otimiza carregamento de imagens
 
-### Gest„o de Foco
+### Gest√£o de Foco
 - Salva o handle da janela ativa antes de mostrar o widget
-- Valida para n„o salvar o prÛprio widget como janela anterior
-- Restaura foco de forma confi·vel usando SetForegroundWindow
+- Valida para n√£o salvar o pr√≥prio widget como janela anterior
+- Restaura foco de forma confi√°vel usando SetForegroundWindow
 
-### SimulaÁ„o de Paste
+### Simula√ß√£o de Paste
 - Delays otimizados entre eventos de teclado
-- SequÍncia confi·vel de Ctrl+V
+- Sequ√™ncia confi√°vel de Ctrl+V
 - Tratamento de erros em todas as etapas
 
-## ?? Requisitos de Sistema
+## Requisitos de Sistema
 
 - Windows 10/11
 - .NET 10 Runtime
 
-## ?? SoluÁ„o de Problemas
+## Solu√ß√£o de Problemas
 
-### O atalho n„o funciona
-- Verifique se outro aplicativo n„o est· usando Alt+Shift+S
-- Execute como Administrador se necess·rio
+### O atalho n√£o funciona
+- Verifique se outro aplicativo n√£o est√° usando Alt+Shift+S
+- Execute como Administrador se necess√°rio
 
-### Imagens n„o aparecem
-- Verifique se h· imagens PNG/JPG na pasta "Imagens"
+### Imagens n√£o aparecem
+- Verifique se h√° imagens PNG/JPG na pasta "Imagens"
 - Formatos suportados: PNG, JPG, JPEG, GIF, WEBP
 
-### Paste n„o funciona
-- Alguns aplicativos podem ter proteÁ„o contra automaÁ„o
-- Aguarde alguns segundos apÛs abrir o aplicativo de destino
-
-## ?? LicenÁa
-
-Este projeto È apenas para fins educacionais e demonstrativos.
-
-## ????? Desenvolvimento
-
-Desenvolvido seguindo as melhores pr·ticas de:
-- Clean Code
-- SOLID Principles
-- MVVM Pattern
-- Async/Await Pattern
-- Windows API Interop
+### Paste n√£o funciona
+- Alguns aplicativos podem ter prote√ß√£o contra automa√ß√£o
+- Aguarde alguns segundos ap√≥s abrir o aplicativo de destino
